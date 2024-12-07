@@ -1,0 +1,35 @@
+<mat-card appearance="outlined" class="main">
+  <mat-card-header>
+    <mat-card-title>Estadísticas</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>Departamentos</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>Asignados:</strong> {{estadisticas()?.dptosAsignados}}</p>
+      </mat-card-content>
+    </mat-card>
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>Pagos</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>Total:</strong> {{estadisticas()?.pagosTotales}}</p>
+        <p><strong>Pendientes:</strong> {{estadisticas()?.pagosPendientes}}</p>
+        <p><strong>Pagados:</strong> {{estadisticas()?.pagosPagados}}</p>
+      </mat-card-content>
+    </mat-card>
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>Reportes</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>Total:</strong> {{estadisticas()?.reportesTotales}}</p>
+        <p><strong>Atendidos:</strong> {{estadisticas()?.reportesAtentidos}}</p>
+        <p><strong>Pendientes:</strong> {{estadisticas()?.reportesPendientes}}</p>
+      </mat-card-content>
+    </mat-card>
+  </mat-card-content>
+</mat-card>

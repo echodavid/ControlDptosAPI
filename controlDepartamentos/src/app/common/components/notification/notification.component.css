@@ -1,0 +1,9 @@
+:host {
+  display: block;
+}
+
+mat-list-item{
+  display: flex;
+  max-width: 300px;
+  overflow-x: hidden;
+}

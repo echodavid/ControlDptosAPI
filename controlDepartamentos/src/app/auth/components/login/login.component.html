@@ -1,0 +1,49 @@
+
+<div class="form-container">
+    <h2>Iniciar Sesión</h2>
+    <form (submit)="emitCredentials()"
+        
+        [formGroup]="myForm"
+    >
+        <mat-form-field appearance="outline"
+
+        >
+            <mat-label>Ingrese su correo</mat-label>
+            <input
+                matInput
+                placeholder="pat@example.com"
+                formControlName="email"
+                (blur)="updateErrorMessageEmail()"
+                required
+            />
+            @if (email.invalid) {
+                <mat-error>{{errorMessageEmail()}}</mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Ingrese su contraseña</mat-label>
+            <input 
+                formControlName="password"
+                matInput [type]="hide() ? 'password' : 'text'" />
+            <button
+                mat-icon-button
+                matSuffix
+                (click)="clickEvent($event)"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide()"
+                (blur)="updateErrorMessagePassword()"
+            >
+                <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            @if (password.invalid) {
+                <mat-error>{{errorMessagePassword()}}</mat-error>
+            }
+        </mat-form-field>
+
+        <button 
+            mat-flat-button
+
+            [disabled]="!myForm.valid"
+        >Iniciar Sesión</button>
+    </form>
+</div>

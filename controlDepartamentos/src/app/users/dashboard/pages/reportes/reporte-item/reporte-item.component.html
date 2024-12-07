@@ -1,0 +1,11 @@
+<mat-card appearance="outlined"
+    [ngClass]="getEstadoClass()"
+>
+    <mat-card-content>
+        <mat-list-item lines="4">
+            <span matListItemTitle>{{fecha_inicio}}</span>
+            <div matListItemLine>{{descripcion}}</div>
+            <div matListItemLine>{{fecha_fin }}</div>
+        </mat-list-item>
+    </mat-card-content>
+</mat-card>

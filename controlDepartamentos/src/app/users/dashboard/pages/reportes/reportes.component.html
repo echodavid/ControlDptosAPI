@@ -1,0 +1,26 @@
+<div class="main-container">
+    <mat-list>
+      <!-- <button mat-raised-button color="primary" (click)="openAddServicioDialog()">Agregar Servicio</button> -->
+      
+    <button mat-raised-button color="primary" (click)="openAddReporte()">Agregar Reporte</button>
+
+      <ng-container *ngFor="let reporte of reportes()">
+        <user-reporte-item
+          (click)="onReporteClic(reporte)"
+          [descripcion]="reporte.descripcion"
+          [fecha_fin]="reporte.fecha_fin"
+          [fecha_inicio]="reporte.fecha_inicio"
+
+          >
+        </user-reporte-item>
+      </ng-container>
+    </mat-list>
+    <div class="content">
+      <ng-container *ngIf="reporteOpened()">
+        <user-reporte-panel
+          [reporte]="reporteOpened()!"
+          (onAttend)="attend($event)">
+        </user-reporte-panel>
+      </ng-container>
+    </div>
+  </div>

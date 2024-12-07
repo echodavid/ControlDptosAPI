@@ -1,0 +1,30 @@
+<div class="main-container">
+    <mat-list>
+      
+    <!-- <button mat-raised-button color="primary" (click)="openAddUser()">Agregar Departamento</button> -->
+
+      <ng-container *ngFor="let servicio of serviciosAsignados()" 
+      
+      >
+        <admin-pago-item
+        
+          (click)="onServicioclic(servicio)" 
+          [srvNombre]="servicio.servicio.nombre"
+          [dptoNombre]="servicio.departamento.nombre"
+          [fechaPagar]="servicio?.pago?.fecha_pagar"
+          [estado]="servicio?.pago?.estado"
+          
+          >
+        </admin-pago-item>
+      </ng-container>
+    </mat-list>
+    <div class="content">
+      <ng-container *ngIf="servicioOpened()"  >
+        <admin-pago-panel
+          [servicio]="servicioOpened()"
+          (onPago)="onUpdatePago($event)"
+          >
+        </admin-pago-panel>
+      </ng-container>
+    </div>
+  </div>

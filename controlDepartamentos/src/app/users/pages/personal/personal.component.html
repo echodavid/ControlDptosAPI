@@ -1,0 +1,78 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Actualizar Información Personal</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div className="formLayout">
+
+    </div>
+    <form [formGroup]="personalForm" (ngSubmit)="onSubmit()">
+      <!-- Campos no modificables -->
+      <mat-form-field appearance="fill">
+        <mat-label>ID</mat-label>
+        <input matInput [value]="userData()?.id" readonly>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Rol</mat-label>
+        <input matInput [value]="userData()?.rol" readonly>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Fecha de Creación</mat-label>
+        <input matInput [value]="userData()?.fecha_creacion | date" readonly>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Estado</mat-label>
+        <input matInput [value]="userData()?.isActive ? 'Activo' : 'Inactivo'" readonly>
+      </mat-form-field>
+
+      <!-- Campos modificables -->
+      <mat-form-field appearance="fill">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre" placeholder="Ingrese su nombre">
+        <mat-error *ngIf="personalForm.get('nombre')?.hasError('minlength')">
+          El nombre debe tener al menos 3 caracteres
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Apellido</mat-label>
+        <input matInput formControlName="apellido" placeholder="Ingrese su apellido">
+        <mat-error *ngIf="personalForm.get('apellido')?.hasError('minlength')">
+          El apellido debe tener al menos 3 caracteres
+        </mat-error>
+      </mat-form-field>
+      
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" placeholder="Ingrese su correo">
+        <mat-error *ngIf="personalForm.get('email')?.hasError('email')">
+          Ingrese un correo válido
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Contraseña</mat-label>
+        <input matInput formControlName="password" type="password" placeholder="Ingrese su contraseña">
+        <mat-error *ngIf="personalForm.get('password')?.hasError('minlength')">
+          La contraseña debe tener al menos 6 caracteres
+        </mat-error>
+        <mat-error *ngIf="personalForm.get('password')?.hasError('maxlength')">
+          La contraseña no debe exceder los 50 caracteres
+        </mat-error>
+        <mat-error *ngIf="personalForm.get('password')?.hasError('pattern')">
+          La contraseña debe tener una letra mayúscula, una letra minúscula y un número
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Teléfono</mat-label>
+        <input matInput formControlName="telefono" placeholder="Ingrese su teléfono">
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit">Actualizar</button>
+    </form>
+  </mat-card-content>
+</mat-card>

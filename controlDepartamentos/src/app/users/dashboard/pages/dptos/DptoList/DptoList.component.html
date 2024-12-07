@@ -1,0 +1,59 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>{{ departamento?.nombre }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    
+    <mat-card id="general" appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>Información</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>ID:</strong> {{ departamento?.id }}</p>
+        <p><strong>Descripción:</strong> {{ departamento?.descripcion }}</p>
+        <p><strong>Estado:</strong> {{ departamento?.estado }}</p>
+        <p><strong>Valoración:</strong> {{ departamento?.valoracion }}</p>
+        <p><strong>Habitaciones:</strong> {{ departamento?.habitaciones }}</p>
+        <p><strong>Baños:</strong> {{ departamento?.banos }}</p>
+        <p><strong>Fecha de construcción:</strong> {{ departamento?.fecha_construccion }}</p>
+      </mat-card-content>
+    </mat-card >
+    <mat-card id="ubicacion" appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>Ubicación</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>Código Postal:</strong> {{ departamento?.ubicacion?.cod_postal }}</p>
+        <p><strong>Estado:</strong> {{ departamento?.ubicacion?.estado }}</p>
+        <p><strong>Municipio:</strong> {{ departamento?.ubicacion?.municipio }}</p>
+        <p><strong>Colonia:</strong> {{ departamento?.ubicacion?.colonia }}</p>
+        <p><strong>Calle:</strong> {{ departamento?.ubicacion?.calle }}</p>
+        <p><strong>Número Exterior:</strong> {{ departamento?.ubicacion?.num_ext }}</p>
+        <p><strong>Número Interior:</strong> {{ departamento?.ubicacion?.num_int }}</p>
+        <p><strong>Referencia:</strong> {{ departamento?.ubicacion?.referencia }}</p>
+      </mat-card-content>
+    </mat-card>
+    <mat-card appearance="outlined" *ngFor="let servicio of departamento?.servicios" [ngClass]="getEstadoClass(servicio)">
+      <mat-card-header>
+        <mat-card-title>{{ servicio.servicio.nombre }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div mat-line><strong>Descripción del Servicio:</strong> {{ servicio.servicio.descripcion }}</div>
+        <div mat-line><strong>Estado del Servicio:</strong> {{ servicio.servicio.estado }}</div>
+        <div mat-line><strong>Encargado:</strong> {{ servicio.encargado }}</div>
+      
+        <ng-container *ngIf="servicio.pago">
+          <div mat-line><strong>Estado del Pago:</strong> {{ servicio.pago.estado }}</div>
+          <div mat-line><strong>Periodicidad:</strong> {{ servicio.pago.periodicidad }}</div>
+          <div mat-line><strong>Fecha de Pago:</strong> {{ servicio.pago.fecha_pago }}</div>
+          <div mat-line><strong>Fecha a Pagar:</strong> {{ servicio.pago.fecha_pagar }}</div>
+          <div mat-line><strong>Fecha de Vencimiento:</strong> {{ servicio.pago.fecha_vencimiento }}</div>
+          <div mat-line><strong>URL Archivo</strong> <a [href]="servicio.pago.archivo.url" >{{ servicio.pago.archivo.url }}</a></div>
+        </ng-container>
+      </mat-card-content>
+    </mat-card>
+  </mat-card-content>
+</mat-card>
+
+
+

@@ -1,0 +1,94 @@
+<mat-card appearance="outlined"
+[ngClass]="{
+    'pendiente': servicio?.pago?.estado === 'pendiente',
+    'pagado': servicio?.pago?.estado  === 'pagado',
+    'vencido': servicio?.pago?.estado  === 'vencido'
+  }"
+>
+    <mat-card-header>
+        <mat-card-title>
+            {{servicio?.servicio?.nombre}}
+        </mat-card-title>
+        <mat-card-subtitle>
+            {{servicio?.departamento?.nombre}}
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-card appearance="outlined">
+            <mat-card-header>
+                <mat-card-title>
+                    Descripción del Servicio
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p><strong>ID:</strong> {{servicio?.servicio?.id}}</p>
+                <p><strong>Nombre:</strong> {{servicio?.servicio?.nombre}}</p>
+                <p><strong>Descripción:</strong> {{servicio?.servicio?.descripcion}}</p>
+                <p><strong>Estado:</strong> {{servicio?.estado}}</p>
+                <p><strong>Encargado:</strong> {{servicio?.encargado}}</p>
+            </mat-card-content>
+        </mat-card>
+        <mat-card appearance="outlined">
+            <mat-card-header>
+                <mat-card-title>
+                    Departamento
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p><strong>ID:</strong> {{servicio?.departamento?.id}}</p>
+                <p><strong>Nombre:</strong> {{servicio?.departamento?.nombre}}</p>
+                <p><strong>Descripción:</strong> {{servicio?.departamento?.descripcion}}</p>
+                <p><strong>Usuario:</strong> {{servicio?.departamento?.user?.nombre + " " + servicio?.departamento?.user?.apellido}}</p>
+
+            </mat-card-content>
+        </mat-card>
+        
+        <mat-card appearance="outlined">
+            <mat-card-header>
+                <mat-card-title>
+                    Pago
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p><strong>ID:</strong> {{servicio?.pago?.id}}</p>
+                <p><strong>Estado:</strong> {{servicio?.pago?.estado}}</p>
+                <p><strong>Periodicidad:</strong> {{servicio?.pago?.periodicidad}}</p>
+                <p><strong>Fecha de Pago:</strong> {{servicio?.pago?.fecha_pago}}</p>
+                <p><strong>Fecha a Pagar:</strong> {{servicio?.pago?.fecha_pagar}}</p>
+                <p><strong>Fecha de Vencimiento:</strong> {{servicio?.pago?.fecha_vencimiento}}</p>
+                <mat-form-field appearance="outline">
+                    <mat-label>Estado del Pago</mat-label>
+                    <mat-select 
+                        [(value)]="updatePago.pago.estado"
+                        (selectionChange)="onEstadoSelect($event.value)"
+                    >
+                      <mat-option 
+                      [value]="ESTADO_PAGO.PENDIENTE">{{ ESTADO_PAGO.PENDIENTE }}</mat-option>
+                      <mat-option [value]="ESTADO_PAGO.VENCIDO">{{ESTADO_PAGO.VENCIDO}}</mat-option>
+                      <mat-option [value]="ESTADO_PAGO.PAGADO">{{ESTADO_PAGO.PAGADO}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                <mat-card appearance="outlined">
+                    <mat-card-header>
+                        <mat-card-title>
+                            Archivos
+                        </mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <mat-card appearance="outlined">
+                            <mat-card-header>
+                                <mat-card-title>
+                                    Comprobante de pago
+                                </mat-card-title>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <p><strong>URL:</strong><a href="{{servicio?.pago?.archivo?.url}}">{{servicio?.pago?.archivo?.url}}</a></p>
+                            </mat-card-content>
+                        </mat-card>
+                    </mat-card-content>
+                </mat-card>
+            </mat-card-content>
+        </mat-card>
+    </mat-card-content>
+
+</mat-card>

@@ -1,0 +1,166 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>{{ departamento?.nombre }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    
+    <mat-card id="general" appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>Información</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>ID:</strong> {{ departamento?.id }}</p>
+        <p><strong>Descripción:</strong> {{ departamento?.descripcion }}</p>
+        <p><strong>Estado:</strong> {{ departamento?.estado }}</p>
+        
+        <div [ngClass]="{'pendiente': departamento ? shouldHighlight(departamento) : false}">
+          <p><strong>Valoración:</strong> {{ departamento?.valoracion }}</p>
+        </div>
+        <p><strong>Habitaciones:</strong> {{ departamento?.habitaciones }}</p>
+        <p><strong>Baños:</strong> {{ departamento?.banos }}</p>
+        <p><strong>Fecha de construcción:</strong> {{ departamento?.fecha_construccion }}</p>
+      </mat-card-content>
+    </mat-card >
+    <mat-card id="ubicacion" appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>Ubicación</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>Código Postal:</strong> {{ departamento?.ubicacion?.cod_postal }}</p>
+        <p><strong>Estado:</strong> {{ departamento?.ubicacion?.estado }}</p>
+        <p><strong>Municipio:</strong> {{ departamento?.ubicacion?.municipio }}</p>
+        <p><strong>Colonia:</strong> {{ departamento?.ubicacion?.colonia }}</p>
+        <p><strong>Calle:</strong> {{ departamento?.ubicacion?.calle }}</p>
+        <p><strong>Número Exterior:</strong> {{ departamento?.ubicacion?.num_ext }}</p>
+        <p><strong>Número Interior:</strong> {{ departamento?.ubicacion?.num_int }}</p>
+        <p><strong>Referencia:</strong> {{ departamento?.ubicacion?.referencia }}</p>
+      </mat-card-content>
+    </mat-card>
+    <mat-card id="servicio" appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>Servicios</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+
+        <mat-card id="servicio" appearance="outlined">
+          <mat-card-header>
+            <mat-card-title>Agregar servicio</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+
+            <!-- Lista de servicios para agregar -->
+            <mat-form-field appearance="outline">
+              <mat-label>Seleccionar Servicio</mat-label>
+              <mat-select [(value)]="selectedServicio" (selectionChange)="onServicioSelect($event.value)">
+                <mat-option *ngFor="let servicio of servicios" [value]="servicio">
+                  {{ servicio.nombre }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <!-- Checkbox para agregar un pago -->
+            <!-- Checkbox para agregar un pago -->
+            <mat-checkbox [(ngModel)]="isPagoAdded">¿Agregar Pago?</mat-checkbox>
+
+            <!-- Formulario de pago (solo si isPagoAdded es true) -->
+            <div *ngIf="isPagoAdded">
+              <mat-form-field appearance="outline">
+                <mat-label>Estado del Pago</mat-label>
+                <mat-select [(value)]="newPago.pago.estado">
+                  <mat-option [value]="ESTADO_PAGO.PENDIENTE">{{ ESTADO_PAGO.PENDIENTE }}</mat-option>
+                  <mat-option [value]="ESTADO_PAGO.VENCIDO">{{ESTADO_PAGO.VENCIDO}}</mat-option>
+                  <mat-option [value]="ESTADO_PAGO.PAGADO">{{ESTADO_PAGO.PAGADO}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Periodicidad</mat-label>
+                <mat-select [(value)]="newPago.pago.periodicidad">
+                  <mat-option value=30>Mensual</mat-option>
+                  <mat-option value=365>Anual</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Fecha de Pago</mat-label>
+                <input matInput [(ngModel)]="newPago.pago.fecha_pago" type="date"/>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Fecha a Pagar</mat-label>
+                <input matInput [(ngModel)]="newPago.pago.fecha_pagar" type="date"/>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Fecha de Vencimiento</mat-label>
+                <input matInput [(ngModel)]="newPago.pago.fecha_vencimiento" type="date"/>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>URL</mat-label>
+                <input matInput [(ngModel)]="newPago.archivo.url"/>
+              </mat-form-field>
+
+            </div>
+
+            <!-- Botón para agregar el servicio y el pago -->
+            <button mat-raised-button color="primary" (click)="addServicio()">Agregar Servicio</button>
+          </mat-card-content>
+        </mat-card>
+
+
+        <mat-list>
+          <mat-card appearance="outlined" *ngFor="let servicio of departamento?.servicios" [ngClass]="getEstadoClass(servicio)">
+            <mat-card-header>
+              <mat-card-title>{{ servicio.servicio.nombre }}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div mat-line><strong>Descripción del Servicio:</strong> {{ servicio.servicio.descripcion }}</div>
+              <div mat-line><strong>Estado del Servicio:</strong> {{ servicio.servicio.estado }}</div>
+              <div mat-line><strong>Encargado:</strong> {{ servicio.encargado }}</div>
+            
+              <ng-container *ngIf="servicio.pago">
+                <div mat-line><strong>Estado del Pago:</strong> {{ servicio.pago.estado }}</div>
+                <div mat-line><strong>Periodicidad:</strong> {{ servicio.pago.periodicidad }}</div>
+                <div mat-line><strong>Fecha de Pago:</strong> {{ servicio.pago.fecha_pago }}</div>
+                <div mat-line><strong>Fecha a Pagar:</strong> {{ servicio.pago.fecha_pagar }}</div>
+                <div mat-line><strong>Fecha de Vencimiento:</strong> {{ servicio.pago.fecha_vencimiento }}</div>
+                <div mat-line><strong>URL Archivo: </strong> <a [href]="servicio.pago.archivo.url" >{{ servicio.pago.archivo.url || "Ver archivo"}}</a></div>
+
+              </ng-container>
+            </mat-card-content>
+          </mat-card>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+    <mat-card id="user">
+      <mat-card-header>
+        <mat-card-title>Usuario</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-form-field appearance="outline">
+          <mat-label>Seleccionar Usuario</mat-label>
+          <mat-select [(value)]="selectedUser" (selectionChange)="onUserSelect($event.value)">
+            <mat-option *ngFor="let user of users" [value]="user">
+              {{ user.nombre }} {{ user.apellido }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+    
+        <!-- Mostrar la información del usuario seleccionado -->
+        <div *ngIf="selectedUser">
+          <p><strong>Nombre:</strong> {{ selectedUser.nombre }}</p>
+          <p><strong>Apellido:</strong> {{ selectedUser.apellido }}</p>
+          <p><strong>Correo:</strong> {{ selectedUser.email }}</p>
+          <p><strong>Teléfono:</strong> {{ selectedUser.telefono }}</p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button color="warn" (click)="delete()">Eliminar</button>
+  </mat-card-actions>
+</mat-card>
+
+
+

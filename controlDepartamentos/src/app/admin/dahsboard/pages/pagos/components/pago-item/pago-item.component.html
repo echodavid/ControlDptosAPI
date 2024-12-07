@@ -1,0 +1,16 @@
+<mat-card appearance="outlined"
+    [ngClass]="{
+    'pendiente': estado === 'pendiente',
+    'pagado': estado === 'pagado',
+    'vencido': estado === 'vencido'
+  }"
+>
+    <mat-card-content>
+        <mat-list-item lines="4">
+            <span matListItemTitle>{{srvNombre}}</span>
+            <span matListItemSubTitle>{{dptoNombre}}</span>
+            <div matListItemLine>{{fechaPagar}}</div>
+        
+        </mat-list-item>
+    </mat-card-content>
+  </mat-card>

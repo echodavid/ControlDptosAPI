@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Crear Nuevo Servicio</h1>
+<div mat-dialog-content>
+  <form [formGroup]="addServicioForm" (ngSubmit)="emitCredentials()" class="add-service-form">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre" placeholder="Ingrese el nombre del servicio">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Descripción</mat-label>
+      <textarea matInput formControlName="descripcion" placeholder="Ingrese la descripción del servicio"></textarea>
+    </mat-form-field>
+
+    <div mat-dialog-actions class="dialog-actions">
+      <button mat-button type="button" (click)="onCancel()">Cancelar</button>
+      <button mat-button color="primary" type="submit">Crear</button>
+    </div>
+  </form>
+</div>

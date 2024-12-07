@@ -1,0 +1,31 @@
+<div class="main-container">
+        <mat-list>
+            @for (not of notifications(); track not){
+                <app-notification
+                    (click)="onNotificationClick(not)" 
+                    [title]="not.titulo"
+                    [description]="not.descripcion"
+                    [date]="not.fecha_creacion"
+                >
+                </app-notification>
+            }
+
+        </mat-list>
+    <div class="content">
+        @if (notificationOpened()){
+            <app-notification-panel
+                (onMarked)="markAsRead($event)"
+                [notification]="notificationOpened()"
+            >
+    
+            </app-notification-panel>
+        }
+    </div>
+</div>
+
+    
+    
+    
+    
+    
+    

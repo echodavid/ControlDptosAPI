@@ -1,0 +1,39 @@
+<div class="main-container">
+    <mat-list>
+        @for (dpto of dptos(); track dpto){
+            <app-departamento
+                (click)="onDptoClick(dpto)" 
+                [nombre]="dpto.nombre"
+                [description]="dpto.descripcion"
+                [valor]="dpto.valoracion"
+            >
+            </app-departamento>
+        }
+
+    </mat-list>
+    <div class="content">
+        @if (dptoOpened()){
+            <dpto-list-item
+                [departamento]="dptoOpened()"
+            >
+                    <!-- <user-dpto-general
+                    [departamento]="dptoOpened()"
+                >
+                </user-dpto-general>
+                @if(dptoOpened()?.ubicacion){
+                    <user-dpto-ubicacion
+                        [ubicacion]="dptoOpened()?.ubicacion || null"
+                    >
+                    </user-dpto-ubicacion>
+                }
+                <user-dpto-service
+                    [servicios]="dptoOpened()?.servicios || []"
+                >
+                </user-dpto-service> -->
+            </dpto-list-item>
+            
+        }
+    </div>
+</div>
+
+

@@ -1,0 +1,33 @@
+.mainContainer{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.example-container {
+  width: auto;
+  display: flex;
+  flex: 1 1 auto;
+  /* The background property is added to clearly distinguish the borders between drawer and main
+     content */
+  background: #eee;
+  position: absolute;
+  top: 56px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+
+.top-bar{
+  flex: 0 0 auto;
+}
+.navBar{
+  width: fit-content;
+  padding: 10px;
+  border-radius: 0;
+}
+.mat-list-item{
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}

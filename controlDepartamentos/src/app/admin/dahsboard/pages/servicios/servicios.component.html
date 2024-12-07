@@ -1,0 +1,22 @@
+<div class="main-container">
+  <mat-list>
+    <button mat-raised-button color="primary" (click)="openAddServicioDialog()">Agregar Servicio</button>
+
+    <ng-container *ngFor="let serv of servicios()">
+      <admin-servicio-item
+        (click)="onServicioClick(serv)" 
+        [title]="serv.nombre"
+        [estado]="serv.estado">
+      </admin-servicio-item>
+    </ng-container>
+  </mat-list>
+  <div class="content">
+    <ng-container *ngIf="servicioOpened()">
+      <admin-servicio-panel
+        [servicio]="servicioOpened()"
+        (onDeleted)="delete($event)"
+        (onEdit)="edit($event)">
+      </admin-servicio-panel>
+    </ng-container>
+  </div>
+</div>

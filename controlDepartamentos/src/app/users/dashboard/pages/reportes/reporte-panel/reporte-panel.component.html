@@ -1,0 +1,25 @@
+<mat-card appearance="outlined">
+    <mat-card-header>
+        <mat-card-title>{{reporte.descripcion}}</mat-card-title>
+        <mat-card-subtitle>{{reporte.fecha_inicio}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <p><strong>fecha de atencion: </strong>{{reporte.fecha_fin}}</p>
+        <mat-card appearance="outlined"
+            *ngIf="reporte.servicio_asignado"
+        >
+            <mat-card-header>
+                <mat-card-title>Servicio</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p><strong>Nombre: </strong>{{reporte.servicio_asignado.servicio.nombre}}</p>
+                <p><strong>Descripcion: </strong>{{reporte.servicio_asignado.servicio.descripcion}}</p>            </mat-card-content>
+        </mat-card>
+    </mat-card-content>
+
+    <mat-card-actions>
+        <button 
+        (click)="markAsAttend()" 
+        mat-button>Marcar como leída</button>
+    </mat-card-actions>
+</mat-card>

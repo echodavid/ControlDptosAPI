@@ -1,0 +1,68 @@
+<h1 mat-dialog-title>Crear Nuevo Reporte</h1>
+<div mat-dialog-content>
+  <form [formGroup]="addReporteForm" (ngSubmit)="emitCredentials()" class="add-reporte-form">
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>
+          Descripcción
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Descripción</mat-label>
+          <textarea matInput formControlName="descripcion" placeholder="Ingrese la descripción del reporte"></textarea>
+          <!-- <mat-error *ngIf="isControlTouched('descripcion')">{{ getErrorMessage('descripcion') }}</mat-error> -->
+
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card appearance="outlined">
+        <mat-card-header>
+          <mat-card-title>
+            Servicio Relacionado
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-checkbox 
+            formControlName="isServicioRelated">
+              ¿Agregar Servicio?
+            </mat-checkbox>
+          <mat-card appearance="outlined" *ngIf="isServicioRelated?.value == true">
+            <mat-card-content>
+              <mat-form-field>
+                <mat-label>Departamento</mat-label>
+                <mat-select 
+                  matSelect
+                (selectionChange)="onDptoSelected($event.value)" formControlName="departamento">
+                  <mat-option *ngFor="let dpto of dptos()" [value]="dpto">
+                    {{ dpto.nombre }}
+                  </mat-option>
+
+                </mat-select>
+                
+              </mat-form-field>
+              <mat-form-field
+                *ngIf="servicios.length > 0"
+              >
+                <mat-label>Servicio</mat-label>
+                <mat-select 
+                  matSelect
+                (selectionChange)="onServicioSelected($event.value)" formControlName="departamento">
+                  <mat-option *ngFor="let servicio of servicios" [value]="servicio">
+                    {{ servicio.servicio.nombre }}
+                  </mat-option>
+
+                </mat-select>
+                
+              </mat-form-field>
+            </mat-card-content>
+          </mat-card>
+        </mat-card-content>
+      </mat-card>
+    </mat-card>
+
+    <div mat-dialog-actions class="dialog-actions">
+      <button mat-button type="button" (click)="onCancel()">Cancelar</button>
+      <button mat-button color="primary" type="submit" [disabled]="!addReporteForm.valid">Crear</button>
+    </div>
+  </form>
+</div>

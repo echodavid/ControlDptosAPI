@@ -1,0 +1,46 @@
+<div className="mainContainer">
+    <mat-drawer-container class="example-container">
+        <mat-drawer class="navBar" mode="side" opened>
+            <mat-nav-list>                   
+                <mat-list-item [routerLink]="['/admin/dashboard/dptos']">
+                    <mat-icon matListItemIcon>apartment</mat-icon>
+                    <div matListItemTitle>Departamentos</div>
+                    
+                </mat-list-item>
+                <mat-list-item [routerLink]="['/admin/dashboard/nots']">
+                    <mat-icon matListItemIcon>notifications</mat-icon>
+                    <div matListItemTitle>Notificaciones</div>
+                    
+                </mat-list-item>
+
+                <mat-list-item [routerLink]="['/admin/dashboard/servicios']">
+                    <mat-icon matListItemIcon>settings_applications</mat-icon>
+                    <div matListItemTitle>Servicios</div>
+                    
+                </mat-list-item>
+                <mat-list-item [routerLink]="['/admin/dashboard/users']">
+                    <mat-icon matListItemIcon>manage_accounts</mat-icon>
+                    <div matListItemTitle>Usuarios</div>
+                    
+                </mat-list-item>
+                <mat-list-item [routerLink]="['/admin/dashboard/pagos']">
+                    <mat-icon matListItemIcon>payments</mat-icon>
+                    <div matListItemTitle>Pagos</div>
+                    
+                </mat-list-item>
+                <mat-list-item [routerLink]="['/admin/dashboard/estadisticas']">
+                    <mat-icon matListItemIcon>insert_chart</mat-icon>
+                    <div matListItemTitle>Estadisticas</div>
+                    
+                </mat-list-item>
+                
+            </mat-nav-list>
+        </mat-drawer>
+
+        <mat-drawer-content class="content">
+            <router-outlet></router-outlet>
+        </mat-drawer-content>
+    </mat-drawer-container>
+
+
+</div>

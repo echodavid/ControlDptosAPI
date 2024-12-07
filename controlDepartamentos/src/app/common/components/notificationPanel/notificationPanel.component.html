@@ -1,0 +1,19 @@
+<mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>{{notification?.titulo}}</mat-card-title>
+      
+      <mat-card-subtitle>{{notification?.tipo}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{notification?.descripcion}}</p>
+      <p>{{notification?.fecha_creacion}}</p>
+    </mat-card-content>
+      
+    <mat-card-actions>
+
+      <button 
+        (click)="markAsRead()"
+        
+      mat-button>Marcar como leída</button>
+    </mat-card-actions>
+  </mat-card>

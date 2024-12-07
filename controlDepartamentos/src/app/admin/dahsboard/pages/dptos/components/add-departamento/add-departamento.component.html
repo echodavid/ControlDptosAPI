@@ -1,0 +1,110 @@
+<h1 mat-dialog-title>Crear Nuevo Servicio</h1>
+<div mat-dialog-content>
+  <form [formGroup]="addDptoForm" (ngSubmit)="emitCredentials()" class="add-dpto-form">
+    
+    <!-- Información del Departamento -->
+    <mat-card id="general" appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>Información</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="nombre" placeholder="Ingrese el nombre del departamento">
+          <mat-error *ngIf="isControlTouched('nombre')">{{ getErrorMessage('nombre') }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Descripción</mat-label>
+          <textarea matInput formControlName="descripcion" placeholder="Ingrese la descripción del departamento"></textarea>
+          <mat-error *ngIf="isControlTouched('descripcion')">{{ getErrorMessage('descripcion') }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Valoración</mat-label>
+          <input matInput formControlName="valoracion" placeholder="Ingrese la valoración del departamento">
+          <mat-error *ngIf="isControlTouched('valoracion')">{{ getErrorMessage('valoracion') }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Habitaciones</mat-label>
+          <input matInput formControlName="habitaciones" type="number" placeholder="Número de habitaciones">
+          <mat-error *ngIf="isControlTouched('habitaciones')">{{ getErrorMessage('habitaciones') }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Baños</mat-label>
+          <input matInput formControlName="banos" type="number" placeholder="Número de baños">
+          <mat-error *ngIf="isControlTouched('banos')">{{ getErrorMessage('banos') }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fecha de construcción</mat-label>
+          <input matInput formControlName="fecha_construccion" type="date">
+          <mat-error *ngIf="isControlTouched('fecha_construccion')">{{ getErrorMessage('fecha_construccion') }}</mat-error>
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Información de la Ubicación -->
+    <mat-card id="ubicacion" appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>Ubicación</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Código Postal</mat-label>
+          <input 
+          matInput formControlName="cod_postal" placeholder="Código Postal">
+          <mat-error *ngIf="isControlTouched('cod_postal')">{{ getErrorMessage('cod_postal') }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Estado</mat-label>
+          <input matInput formControlName="estado_ubicacion" placeholder="Estado">
+          <mat-error *ngIf="isControlTouched('estado_ubicacion')">{{ getErrorMessage('estado') }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Municipio</mat-label>
+          <input matInput formControlName="municipio" placeholder="Municipio">
+          <mat-error *ngIf="isControlTouched('municipio')">{{ getErrorMessage('municipio') }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Colonia</mat-label>
+          <input matInput formControlName="colonia" placeholder="Colonia">
+          <mat-error *ngIf="isControlTouched('colonia')">{{ getErrorMessage('colonia') }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Calle</mat-label>
+          <input matInput formControlName="calle" placeholder="Calle">
+          <mat-error *ngIf="isControlTouched('calle')">{{ getErrorMessage('calle') }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Número Exterior</mat-label>
+          <input matInput formControlName="num_ext" placeholder="Número Exterior">
+          <mat-error *ngIf="isControlTouched('num_ext')">{{ getErrorMessage('num_ext') }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Número Interior</mat-label>
+          <input matInput formControlName="num_int" placeholder="Número Interior">
+          <mat-error *ngIf="isControlTouched('num_int')">{{ getErrorMessage('num_int') }}</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Enlace maps</mat-label>
+            <input matInput formControlName="url" placeholder="https://google.maps">
+            <mat-error *ngIf="isControlTouched('url')">{{ getErrorMessage('url') }}</mat-error>
+          </mat-form-field>
+      </mat-card-content>
+    </mat-card>
+
+    <div mat-dialog-actions class="dialog-actions">
+      <button mat-button type="button" (click)="onCancel()">Cancelar</button>
+      <button mat-button color="primary" type="submit" [disabled]="!addDptoForm.valid">Crear</button>
+    </div>
+  </form>
+</div>

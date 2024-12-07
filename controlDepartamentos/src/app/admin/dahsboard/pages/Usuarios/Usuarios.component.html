@@ -1,0 +1,25 @@
+<div class="main-container">
+    <mat-list>
+      
+    <button mat-raised-button color="primary" (click)="openAddUser()">Agregar Usuario</button>
+
+      <ng-container *ngFor="let user of users()">
+        <admin-user-item
+          (click)="onUserClic(user)" 
+          [nombre]="user.nombre"
+          [apellido]="user.apellido"
+          [email]="user.email"
+          [telefono]="user.telefono"
+          >
+        </admin-user-item>
+      </ng-container>
+    </mat-list>
+    <div class="content">
+      <ng-container *ngIf="userOpened()">
+        <admin-user-panel
+          [user]="userOpened()"
+          (onDeleted)="delete($event)">
+        </admin-user-panel>
+      </ng-container>
+    </div>
+  </div>

@@ -1,0 +1,30 @@
+<div class="main-container">
+    <mat-list>
+      <!-- <button mat-raised-button color="primary" (click)="openAddServicioDialog()">Agregar Servicio</button> -->
+      
+    <button mat-raised-button color="primary" (click)="openAddDpto()">Agregar Departamento</button>
+
+      <ng-container *ngFor="let dpto of dptos()">
+        <admin-departamento-item
+          (click)="onDptoClic(dpto)" 
+          [nombre]="dpto.nombre"
+          [description]="dpto.descripcion"
+          [valor]="dpto.valoracion"
+          >
+        </admin-departamento-item>
+      </ng-container>
+    </mat-list>
+    <div class="content">
+      <ng-container *ngIf="dptoOpened()">
+        <admin-departamento-panel
+          [departamento]="dptoOpened()"
+          [users]="users()"
+          [servicios]="servicios() || []"
+          (onServicePost)="postService($event)"
+          (onDeleted)="delete($event)"
+          (onEdit)="edit($event)"
+          (onUser)="onUserSelect($event)">
+        </admin-departamento-panel>
+      </ng-container>
+    </div>
+  </div>

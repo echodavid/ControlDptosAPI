@@ -1,0 +1,10 @@
+:host {
+  display: block;
+}
+.atentido {
+  background-color: #d4edda; /* Verde claro para 'pagado' */
+}
+
+.pendiente {
+  background-color: #fff3cd; /* Amarillo claro para 'pendiente' */
+}

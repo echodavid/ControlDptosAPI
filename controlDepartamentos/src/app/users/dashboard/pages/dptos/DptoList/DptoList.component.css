@@ -1,0 +1,21 @@
+:host {
+  display: block;
+}
+
+#card-container{
+  width: 350px;
+}
+mat-card {
+  overflow-y:auto;
+}
+.pagado {
+  background-color: #d4edda; /* Verde claro para 'pagado' */
+}
+
+.pendiente {
+  background-color: #fff3cd; /* Amarillo claro para 'pendiente' */
+}
+
+.vencido {
+  background-color: #f8d7da; /* Rojo claro para 'vencido' */
+}
